@@ -177,6 +177,9 @@ class Satoshis(object):
     def __ne__(self, other):
         return not (self == other)
 
+    def __add__(self, other):
+        return Satoshis(self.value + other.value)
+
 
 # note: this is not a NamedTuple as then its json encoding cannot be customized
 class Fiat(object):

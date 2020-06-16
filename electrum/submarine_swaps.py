@@ -190,6 +190,9 @@ class SwapManager(Logger):
         swap = self.swaps.get(payment_hash.hex())
         if swap:
             return swap
+        payment_hash = self.prepayments.get(payment_hash)
+        if payment_hash:
+            return self.swaps.get(payment_hash.hex())
 
     def add_lnwatcher_callback(self, swap: SwapData) -> None:
         callback = lambda: self._claim_swap(swap)
